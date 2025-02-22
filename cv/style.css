@@ -80,11 +80,23 @@ body {
     auto-fit,
     minmax(auto, 1fr)
   ); /* Responsive project cards */
-  grid-template-columns: repeat(auto-fit, minmax(480px, 100fr));
+  grid-template-columns: repeat(auto-fit, minmax(720px, 100fr));
 
   /*masonry-template-tracks: repeat(auto-fill, minmax(8rem, 1fr) minmax(16rem, 2fr)) minmax(8rem, 1fr);*/
   grid-template-rows: masonry;
   masonry-auto-flow: ordered;
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .masonry {
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  }
+}
+@media (max-width: 479px) {
+  .masonry {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 }
 
 .container {
