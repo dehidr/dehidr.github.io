@@ -1,26 +1,129 @@
 <!doctype html>
-
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>emre_kerman</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>[CV] Emre Kerman</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <style>
+      :root {
+        font-family: Inter, sans-serif;
+        font-feature-settings:
+          "liga" 1,
+          "calt" 1; /* fix for Chrome */
+      }
+      @supports (font-variation-settings: normal) {
+        :root {
+          font-family: InterVariable, sans-serif;
+        }
+      }
+    </style>
+
+    <!-- For stability in production, it's recommended that you hardcode the latest version in the CDN link. -->
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/franken-ui@internal/dist/css/core.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/franken-ui@internal/dist/css/utilities.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     />
-    <!-- <link -->
-    <!--   href="https://fonts.googleapis.com/icon?family=Material+Icons" -->
-    <!--   rel="stylesheet" -->
-    <!-- /> -->
-    <!-- <link -->
-    <!--   href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" -->
-    <!--   rel="stylesheet" -->
-    <!-- /> -->
-    <!-- <script type="module"> -->
-    <!--   import * as materialweb from "https://esm.run/@material/web"; -->
-    <!-- </script> -->
+
+    <script>
+      const htmlElement = document.documentElement;
+      const mocha = {
+        ".uk-theme-mocha": {
+          "--foreground": "240 21% 15%",
+          "--background": "226 64% 88%",
+          "--muted-foreground": "240 12% 19%",
+          "--muted": "240 12% 69%",
+          "--popover-foreground": "240 21% 12%",
+          "--popover": "226 64% 98%",
+          "--card-foreground": "240 21% 13%",
+          "--card": "226 64% 93%",
+          "--border": "240 11% 20%",
+          "--input": "240 11% 23%",
+          "--primary-foreground": "267 84% 81%",
+          "--primary": "267 84% 21%",
+          "--secondary-foreground": "267 30% 25%",
+          "--secondary": "267 30% 85%",
+          "--accent-foreground": "240 21% 30%",
+          "--accent": "240 21% 90%",
+          "--destructive-foreground": "8 96% 56%",
+          "--destructive": "0 0% 100%",
+          "--ring": "267 84% 81%",
+          "--chart-1": "267 84% 81%",
+          "--chart-2": "267 30% 25%",
+          "--chart-3": "240 21% 30%",
+          "--chart-4": "267 30% 28%",
+          "--chart-5": "267 87% 81%",
+          "--radius": "0.5rem",
+        },
+        ".dark.uk-theme-mocha": {
+          "--background": "240 21% 15%",
+          "--foreground": "226 64% 88%",
+          "--muted": "240 12% 19%",
+          "--muted-foreground": "240 12% 69%",
+          "--popover": "240 21% 12%",
+          "--popover-foreground": "226 64% 98%",
+          "--card": "240 21% 13%",
+          "--card-foreground": "226 64% 93%",
+          "--border": "240 11% 20%",
+          "--input": "240 11% 23%",
+          "--primary": "267 84% 81%",
+          "--primary-foreground": "267 84% 21%",
+          "--secondary": "267 30% 25%",
+          "--secondary-foreground": "267 30% 85%",
+          "--accent": "240 21% 30%",
+          "--accent-foreground": "240 21% 90%",
+          "--destructive": "8 96% 56%",
+          "--destructive-foreground": "0 0% 100%",
+          "--ring": "267 84% 81%",
+          "--chart-1": "267 84% 81%",
+          "--chart-2": "267 30% 25%",
+          "--chart-3": "240 21% 30%",
+          "--chart-4": "267 30% 28%",
+          "--chart-5": "267 87% 81%",
+        },
+      };
+      const __FRANKEN__ = JSON.parse(
+        localStorage.getItem("__FRANKEN__") || "{}",
+      );
+
+      if (
+        __FRANKEN__.mode === "dark" ||
+        (!__FRANKEN__.mode &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        htmlElement.classList.add("dark");
+      } else {
+        htmlElement.classList.remove("dark");
+      }
+
+      htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-mocha");
+      htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
+      htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
+      htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
+      htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+    </script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/franken-ui@internal/dist/js/core.iife.js"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/franken-ui@internal/dist/js/icon.iife.js"
+    ></script>
+
     <script>
       function setRandomGifBackground(jsonUrl) {
         fetch(jsonUrl)
@@ -34,7 +137,7 @@
             const randomIndex = Math.floor(Math.random() * data.length);
             const randomGifUrl = data[randomIndex].url;
 
-            document.body.style.backgroundImage = `url('${randomGifUrl}'),linear-gradient(
+            document.body.style.backgroundImage = `url('${randomGifUrl}'), linear-gradient(
     #89b4fa,
     #89dceb,
     #94e2d5,
@@ -50,8 +153,7 @@
     #f9e2af,
     #fab387,
     #74c7ec,
-    #89b4fa)
-`;
+    #89b4fa)`;
             document.body.style.backgroundSize = "contain";
             document.body.style.backgroundPosition = "center";
           })
@@ -64,94 +166,214 @@
         setRandomGifBackground("https://dehidr.github.io/gifs.json");
       });
     </script>
+    <!-- <script
+      type="module"
+      src="https://unpkg.com/franken-ui@internal/dist/js/chart.iife.js"
+    ></script> -->
   </head>
-
+  <!-- <body class="bg-background text-foreground"> -->
   <body>
-    <div class="navbar card">
-      <b>[CV]</b>
-      <a href="#home">[HOME]</a>
-      <a href="#home">[GITHUB]</a>
+    <!-- START CODING HERE -->
+
+    <div class="navbar uk-card uk-card-body gap-x-2 flex" style="z-index: 200">
+      <div style="display: inline-block" style="flex-grow: 2">
+        <b>[CV]</b>
+        <a href="#home">[HOME]</a>
+        <a href="#home">[GITHUB]</a>
+      </div>
+      <div class="uk-inline">
+        <!-- <button class="uk-btn uk-btn-default"> -->
+
+        <div class="size-4" style="display: inline-block">
+          <uk-icon icon="palette" style="display: inline-block"></uk-icon>
+        </div>
+        <!-- </button> -->
+        <div
+          class="uk-card uk-card-body uk-drop w-96"
+          data-uk-drop="mode: click; offset: 8"
+        >
+          <div class="uk-h3">Customize</div>
+          <p class="mb-4 mt-1 text-sm text-muted-foreground"></p>
+          <uk-theme-switcher id="theme-switcher">
+            <select hidden>
+              <optgroup data-key="theme" label="Theme">
+                <option data-hex="#52525b" value="uk-theme-zinc">Zinc</option>
+                <option data-hex="#64748b" value="uk-theme-slate">Slate</option>
+                <option data-hex="#78716c" value="uk-theme-stone">Stone</option>
+                <option data-hex="#6b7280" value="uk-theme-gray">Gray</option>
+                <option data-hex="#1e1e2e" value="uk-theme-mocha" selected>
+                  Mocha
+                </option>
+                <option data-hex="#737373" value="uk-theme-neutral">
+                  Neutral
+                </option>
+                <option data-hex="#dc2626" value="uk-theme-red">Red</option>
+                <option data-hex="#e11d48" value="uk-theme-rose">Rose</option>
+                <option data-hex="#f97316" value="uk-theme-orange">
+                  Orange
+                </option>
+                <option data-hex="#16a34a" value="uk-theme-green">Green</option>
+                <option data-hex="#2563eb" value="uk-theme-blue">Blue</option>
+                <option data-hex="#facc15" value="uk-theme-yellow">
+                  Yellow
+                </option>
+                <option data-hex="#7c3aed" value="uk-theme-violet">
+                  Violet
+                </option>
+              </optgroup>
+              <optgroup data-key="radii" label="Radii">
+                <option value="uk-radii-none">None</option>
+                <option value="uk-radii-sm">Small</option>
+                <option value="uk-radii-md" selected>Medium</option>
+                <option value="uk-radii-lg">Large</option>
+              </optgroup>
+              <optgroup data-key="shadows" label="Shadows">
+                <option value="uk-shadows-none">None</option>
+                <option value="uk-shadows-sm" selected>Small</option>
+                <option value="uk-shadows-md">Medium</option>
+                <option value="uk-shadows-lg">Large</option>
+              </optgroup>
+              <optgroup data-key="font" label="Font">
+                <option value="uk-font-sm" selected>Small</option>
+                <option value="uk-font-base">Default</option>
+              </optgroup>
+              <optgroup data-key="mode" label="Mode">
+                <option data-icon="sun" value="light">Light</option>
+                <option data-icon="moon" value="dark">Dark</option>
+              </optgroup>
+            </select>
+          </uk-theme-switcher>
+        </div>
+      </div>
     </div>
 
     <div class="container">
       <div class="masonry">
+        <!-- <div data-uk-sortable class="masonry"> -->
+        <!-- <div class="masonry"> -->
         <!-- <div class="profile-parent"> -->
         <!--   <div class="profile-child-pic"> -->
         <!--     <span> -->
         <!--       <img src="dehidr.jpg" alt="Profile Picture" class="profile-image" /> -->
         <!--     </span> -->
         <!--   </div> -->
-
-        <div class="profile-child">
-          <header class="header card">
-            <div class="header-content">
-              <!-- <img src="dehidr.jpg" alt="Profile Picture" class="profile-image" /> -->
-              <div class="header-text">
-                <h1 class="name">Emre Kerman</h1>
-                <p class="title">Computer Engineer</p>
-                <div class="contact-info">
-                  <i class="material-symbols-outlined">email</i>
-                  <a href="mailto:emrekerman02@gmail.com"
-                    >emrekerman02@gmail.com</a
-                  >
-
-                  <p>
-                    <i class="material-symbols-outlined">work</i>
-                    <a
-                      href="https://www.linkedin.com/in/kermanemre"
-                      target="_blank"
-                      >LinkedIn Profile</a
-                    >
-                  </p>
-                  <p>
-                    <i class="material-symbols-outlined">code</i>
-                    <a href="https://github.com/dehidr" target="_blank"
-                      >github.com/dehidr</a
-                    >
-                  </p>
-                </div>
+        <div class="uk-card uk-card-body">
+          <h3 class="uk-card-title">Emre Kerman</h3>
+          <hr class="uk-hr" />
+          <div class="mt-4">
+            <div>
+              <div class="size-4" style="display: inline-block">
+                <uk-icon icon="mail"></uk-icon>
               </div>
+              <a href="mailto:emrekerman02@gmail.com">emrekerman02@gmail.com</a>
             </div>
-          </header>
+
+            <div>
+              <div class="size-4" style="display: inline-block">
+                <uk-icon icon="linkedin"></uk-icon>
+              </div>
+              <a href="https://www.linkedin.com/in/kermanemre" target="_blank"
+                >LinkedIn Profile</a
+              >
+            </div>
+
+            <div>
+              <div class="size-4" style="display: inline-block">
+                <uk-icon icon="github"></uk-icon>
+              </div>
+              <a href="https://github.com/dehidr" target="_blank"
+                >github.com/dehidr</a
+              >
+            </div>
+          </div>
         </div>
+
         <!-- </div> -->
 
-        <section class="section summary card">
-          <h2>Summary</h2>
-          <p>
+        <section class="uk-card uk-card-body">
+          <h3 class="uk-card-title">Summary</h3>
+          <hr class="uk-hr" />
+          <p class="mt-4">
             Computer Engineering student from Izmir, currently studying at
-            <a href="https://ceng.deu.edu.tr/">Dokuz Eylül University</a>, who
-            loves Linux and Open-Source software. Experienced in software
+            <a href="https://ceng.deu.edu.tr/" class="uk-link"
+              >Dokuz Eylül University</a
+            >, who loves Linux and Open-Source software. Experienced in software
             development, machine learning, and embedded systems, with hands-on
             experience in IoT, computer vision, and backend development. Always
             eager to learn new technologies and contributing.
           </p>
         </section>
 
-        <section class="section skills card">
-          <h2>Skills</h2>
-          <div class="skills-grid">
-            <div>
-              <h3>Technical Skills</h3>
+        <div class="uk-card uk-card-body">
+          <h4 class="uk-card-title">Technical Skills</h4>
 
-              <ul>
-                Go, Rust, Java, Kotlin, C#, PostgreSQL, Lua, C, Docker, Linux,
-                Bash, Python, Tensorflow, Numpy, HTML, CSS, JavaScript, SQL,
-                NoSQL, Databases, Photoshop, After Effects, Illustrator
-              </ul>
-            </div>
-            <div>
-              <h3>Soft Skills</h3>
-              <ul>
+          <ul class="mt-4 uk-list">
+            <li>
+              <span class="uk-label uk-label-primary">#lang</span>
+              <span class="uk-label">Go</span>
+              <span class="uk-label">Rust</span>
+              <span class="uk-label">Java</span>
+              <span class="uk-label">Kotlin</span>
+              <span class="uk-label">C#</span>
+              <span class="uk-label">Lua</span>
+              <span class="uk-label">C</span>
+            </li>
+
+            <li>
+              <span class="uk-label uk-label-primary">#os</span>
+              <span class="uk-label">Docker</span>
+              <span class="uk-label">Linux</span>
+              <span class="uk-label">Bash</span>
+            </li>
+
+            <li>
+              <span class="uk-label uk-label-primary">#machinelearning</span>
+              <span class="uk-label">Python</span>
+              <span class="uk-label">Tensorflow</span>
+              <span class="uk-label">Keras</span>
+              <span class="uk-label">Numpy</span>
+            </li>
+
+            <li>
+              <span class="uk-label uk-label-primary">#web</span>
+              <span class="uk-label">HTML</span>
+              <span class="uk-label">CSS</span>
+              <span class="uk-label">JavaScript</span>
+            </li>
+
+            <li>
+              <span class="uk-label uk-label-primary">#database</span>
+              <span class="uk-label">PostgreSQL</span>
+              <span class="uk-label">SQL</span>
+              <span class="uk-label">NoSQL</span>
+            </li>
+
+            <li>
+              <span class="uk-label uk-label-primary">#adobe</span>
+              <span class="uk-label">Photoshop</span>
+              <span class="uk-label">After Effects</span>
+              <span class="uk-label">Illustrator</span>
+              <span class="uk-label">Premiere Pro</span>
+            </li>
+          </ul>
+        </div>
+
+        <section class="skills uk-card uk-card-body">
+          <h3 class="uk-card-title">Skills</h3>
+          <hr class="uk-hr" />
+          <div class="mt-4 skills-grid">
+            <div class="uk-card uk-card-body">
+              <h4 class="uk-card-title">Soft Skills</h4>
+              <ul class="mt-4 uk-list">
                 <li>Communication (Written & Verbal)</li>
                 <li>Problem-Solving</li>
                 <li>Teamwork & Collaboration</li>
                 <li>Leadership</li>
               </ul>
             </div>
-            <div>
-              <h3>Languages</h3>
-              <ul>
+            <div class="uk-card uk-card-body">
+              <h4 class="uk-card-title">Languages</h4>
+              <ul class="mt-4 uk-list">
                 <li>Turkish (Native)</li>
                 <li>English (Fluent)</li>
                 <li>German (Beginner)</li>
@@ -160,11 +382,13 @@
           </div>
         </section>
 
-        <section class="section experience card">
-          <h2>Experience</h2>
-          <div class="experience-list">
-            <div class="experience-item card">
-              <h3>Software Engineer</h3>
+        <section class="uk-card uk-card-body">
+          <h3 class="uk-card-title">Experience</h3>
+
+          <hr class="uk-hr" />
+          <div class="mt-4 experience-list">
+            <div class="uk-card uk-card-body">
+              <h3 class="uk-card-title">Software Engineer</h3>
               <p class="company">Acme Corporation</p>
               <p class="date">2020 - Present</p>
               <ul>
@@ -182,8 +406,8 @@
                 </li>
               </ul>
             </div>
-            <div class="experience-item card">
-              <h3>Web Developer Intern</h3>
+            <div class="uk-card uk-card-body">
+              <h3 class="uk-card-title">Web Developer Intern</h3>
               <p class="company">Beta Industries</p>
               <p class="date">Summer 2019</p>
               <ul>
@@ -200,9 +424,10 @@
           </div>
         </section>
 
-        <section class="section education card">
-          <h2>Education</h2>
-          <div class="education-list">
+        <section class="uk-card uk-card-body">
+          <h3 class="uk-card-title">Education</h3>
+          <hr class="uk-hr" />
+          <div class="mt-4 education-list">
             <!-- <div class="education-item card"> -->
             <!--   <h3>High-school</h3> -->
             <!--   <p class="institution">Izmir Yunus Emre Anadolu Lisesi</p> -->
@@ -212,28 +437,33 @@
             <!--   Development. -->
             <!-- </p> -->
             <!-- </div> -->
-            <div class="education-item card">
-              <h3>Bachelor of Science in Computer Engineering</h3>
-              <p class="institution">Dokuz Eylül University</p>
+            <div class="uk-card uk-card-body">
+              <h3 class="uk-card-title">
+                Bachelor of Science in Computer Engineering
+              </h3>
+              <!-- <hr class="uk-hr" /> -->
+              <p class="institution mt-4">Dokuz Eylül University</p>
               <p class="date">2021 - 2025</p>
             </div>
           </div>
         </section>
-        <section class="section projects card">
-          <h2>Projects</h2>
-          <div class="projects-list">
-            <div class="project-item card">
-              <h3>Personal Portfolio Website</h3>
-              <p>
+        <section class="uk-card uk-card-body">
+          <h3 class="uk-card-title">Projects</h3>
+
+          <hr class="uk-hr" />
+          <div class="projects-list mt-4">
+            <div class="uk-card uk-card-body">
+              <h3 class="uk-card-title">Personal Portfolio Website</h3>
+              <p class="mt-4">
                 Developed a responsive portfolio website to showcase my skills
                 and projects using React and Material UI.
               </p>
               <p class="technologies">Technologies: React, Material UI, CSS</p>
               <a href="#">View Project</a>
             </div>
-            <div class="project-item card">
-              <h3>E-commerce Platform (Mock)</h3>
-              <p>
+            <div class="uk-card uk-card-body">
+              <h3 class="uk-card-title">E-commerce Platform (Mock)</h3>
+              <p class="mt-4">
                 Created a mock e-commerce platform with user authentication,
                 product listing, and shopping cart functionality.
               </p>
@@ -278,36 +508,75 @@
         <!--   </ol> -->
         <!-- </section> -->
 
-        <footer class="footer card">
-          <div class="contact-footer">
-            <h2>Let's Connect!</h2>
-            <p>
+        <footer class="uk-card uk-card-body">
+          <div class="" style="text-align: center">
+            <h3 class="uk-card-title">Let's Connect!</h3>
+            <p class="mt-4">
               I'm always open to new opportunities and collaborations. Feel free
               to reach out!
             </p>
-            <div class="contact-info">
-              <p>
+
+            <div class="mt-4">
+              <button class="uk-btn uk-btn-default">
+                <div class="size-4" style="display: inline-block">
+                  <uk-icon icon="mail"></uk-icon>
+                </div>
                 <a href="mailto:emrekerman02@gmail.com"
-                  ><i class="material-symbols-outlined">email</i>
-                  emrekerman02@gmail.com</a
+                  >emrekerman02@gmail.com</a
                 >
-              </p>
-              <p>
+              </button>
+
+              <button class="uk-btn uk-btn-default">
+                <div class="size-4" style="display: inline-block">
+                  <uk-icon icon="linkedin"></uk-icon>
+                </div>
                 <a href="https://www.linkedin.com/in/kermanemre" target="_blank"
-                  ><i class="material-symbols-outlined">work</i> LinkedIn
-                  Profile</a
+                  >LinkedIn Profile</a
                 >
-              </p>
-              <p>
+              </button>
+
+              <button class="uk-btn uk-btn-default">
+                <div class="size-4" style="display: inline-block">
+                  <uk-icon icon="github"></uk-icon>
+                </div>
                 <a href="https://github.com/dehidr" target="_blank"
-                  ><i class="material-symbols-outlined">code</i>
-                  github.com/dehidr</a
+                  >github.com/dehidr</a
                 >
-              </p>
+              </button>
             </div>
+            <!-- <div class="flex flex-wrap gap-2" style="flex-grow: 1"> -->
+            <!--   <button class="uk-btn uk-btn-default"> -->
+            <!--     <div class="size-4" style="display: inline-block"> -->
+            <!--       <uk-icon icon="mail"></uk-icon> -->
+            <!--     </div> -->
+            <!--     <a href="mailto:emrekerman02@gmail.com"> -->
+            <!--       emrekerman02@gmail.com</a -->
+            <!--     > -->
+            <!--   </button> -->
+            <!--   <button class="uk-btn uk-btn-default"> -->
+            <!--     <div class="size-4" style="display: inline-block"> -->
+            <!--       <uk-icon icon="linkedin"></uk-icon> -->
+            <!--     </div> -->
+            <!--     <a -->
+            <!--       href="https://www.linkedin.com/in/kermanemre" -->
+            <!--       target="_blank" -->
+            <!--     > -->
+            <!--       LinkedIn Profile</a -->
+            <!--     > -->
+            <!--   </button> -->
+            <!--   <button class="uk-btn uk-btn-default"> -->
+            <!--     <div class="size-4" style="display: inline-block"> -->
+            <!--       <uk-icon icon="github"></uk-icon> -->
+            <!--     </div> -->
+            <!--     <a href="https://github.com/dehidr" target="_blank"> -->
+            <!--       github.com/dehidr</a -->
+            <!--     > -->
+            <!--   </button> -->
+            <!-- </div> -->
           </div>
         </footer>
       </div>
     </div>
+    <!-- END -->
   </body>
 </html>

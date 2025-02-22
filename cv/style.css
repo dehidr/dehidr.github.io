@@ -1,3 +1,61 @@
+@layer base {
+  .uk-theme-mocha {
+    --foreground: 240 21% 15%;
+    --background: 226 64% 88%;
+    --muted-foreground: 240 12% 19%;
+    --muted: 240 12% 69%;
+    --popover-foreground: 240 21% 12%;
+    --popover: 226 64% 98%;
+    --card-foreground: 240 21% 13%;
+    --card: 226 64% 93%;
+    --border: 240 11% 20%;
+    --input: 240 11% 23%;
+    --primary-foreground: 267 84% 81%;
+    --primary: 267 84% 21%;
+    --secondary-foreground: 267 30% 25%;
+    --secondary: 267 30% 85%;
+    --accent-foreground: 240 21% 30%;
+    --accent: 240 21% 90%;
+    --destructive-foreground: 8 96% 56%;
+    --destructive: 0 0% 100%;
+    --ring: 267 84% 81%;
+    --chart-1: 267 84% 81%;
+    --chart-2: 267 30% 25%;
+    --chart-3: 240 21% 30%;
+    --chart-4: 267 30% 28%;
+    --chart-5: 267 87% 81%;
+    --radius: 0.5rem;
+  }
+
+  .dark.uk-theme-mocha {
+    --background: 240 21% 15%;
+    --foreground: 226 64% 88%;
+    --muted: 240 12% 19%;
+    --muted-foreground: 240 12% 69%;
+    --popover: 240 21% 12%;
+    --popover-foreground: 226 64% 98%;
+    --card: 240 21% 13%;
+    --card-foreground: 226 64% 93%;
+    --border: 240 11% 20%;
+    /*--border: 226 64% 88%;*/
+    --input: 240 11% 23%;
+    --primary: 267 84% 81%;
+    --primary-foreground: 267 84% 21%;
+    --secondary: 267 30% 25%;
+    --secondary-foreground: 267 30% 85%;
+    --accent: 240 21% 30%;
+    --accent-foreground: 240 21% 90%;
+    --destructive: 8 96% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 267 84% 81%;
+    --chart-1: 267 84% 81%;
+    --chart-2: 267 30% 25%;
+    --chart-3: 240 21% 30%;
+    --chart-4: 267 30% 28%;
+    --chart-5: 267 87% 81%;
+  }
+}
+
 body {
   font-family:
     "CaskaydiaCove Nerd Font", "Cascadia Code", "JetBrains Mono", monospace,
@@ -52,8 +110,8 @@ body {
 }
 
 .navbar {
-  color: #1e1e2e; /* Dark grey text */
-  background-color: #cdd6f4;
+  /*color: #1e1e2e;*/
+  /*background-color: #cdd6f4;*/
   /*padding: 20px;*/
   text-decoration: none;
   margin: 20px 20px 0;
@@ -65,9 +123,14 @@ body {
   width: fill-available;
 }
 
+svg {
+  display: inline-block;
+}
+
 .navbar * {
-  color: #1e1e2e; /* Dark grey text */
-  background-color: #cdd6f4;
+  /*color: #1e1e2e; */
+  /*background-color: #cdd6f4;*/
+
   text-decoration: none;
 }
 
@@ -206,17 +269,17 @@ body {
   font-size: 1.4rem;
   font-weight: 500;
   margin-bottom: 10px;
-  color: #1e1e2e;
+  /*color: #1e1e2e;*/
 }
 
-.skills-grid ul {
-  list-style: none;
-  padding: 0;
-}
+/*.skills-grid ul {*/
+/*  list-style: none;*/
+/*  padding: 0;*/
+/*}*/
 
 .skills-grid ul li {
   margin-bottom: 8px;
-  color: #1e1e2e;
+  /*color: #1e1e2e;*/
 }
 
 /* Experience & Education Sections */
