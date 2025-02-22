@@ -34,7 +34,24 @@
             const randomIndex = Math.floor(Math.random() * data.length);
             const randomGifUrl = data[randomIndex].url;
 
-            document.body.style.backgroundImage = `url('${randomGifUrl}')`;
+            document.body.style.backgroundImage = `url('${randomGifUrl}'),linear-gradient(
+    #89b4fa,
+    #89dceb,
+    #94e2d5,
+    #a6e3a1,
+    #74c7ec,
+    #f5c2e7,
+    #f38ba8,
+    #b4befe,
+    #cba6f7,
+    #eba0ac,
+    #f2cdcd,
+    #f5e0dc,
+    #f9e2af,
+    #fab387,
+    #74c7ec,
+    #89b4fa)
+`;
             document.body.style.backgroundSize = "contain";
             document.body.style.backgroundPosition = "center";
           })
@@ -73,17 +90,11 @@
                 <h1 class="name">Emre Kerman</h1>
                 <p class="title">Computer Engineer</p>
                 <div class="contact-info">
-                  <p>
-                    <i class="material-symbols-outlined">email</i>
-                    <a href="mailto:emrekerman02@gmail.com"
-                      >emrekerman02@gmail.com</a
-                    >
-                  </p>
+                  <i class="material-symbols-outlined">email</i>
+                  <a href="mailto:emrekerman02@gmail.com"
+                    >emrekerman02@gmail.com</a
+                  >
 
-                  <p>
-                    <i class="material-symbols-outlined">phone</i>
-                    (+90) 541 264 0344
-                  </p>
                   <p>
                     <i class="material-symbols-outlined">work</i>
                     <a
