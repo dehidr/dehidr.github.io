@@ -159,13 +159,35 @@ svg {
 
 /* Adjust for smaller screens */
 @media (max-width: 768px) {
+  .navbar {
+    margin-right: 15px !important;
+    margin-left: 15px !important;
+  }
   .masonry {
-    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)) !important;
+  }
+  .container {
+    margin-right: 15px !important;
+    margin-left: 15px !important;
+  }
+  .uk-card {
+    padding: 15px !important;
   }
 }
 @media (max-width: 479px) {
+  .navbar {
+    margin-right: 15px !important;
+    margin-left: 15px !important;
+  }
   .masonry {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  }
+  .container {
+    margin-right: 15px !important;
+    margin-left: 15px !important;
+  }
+  .uk-card {
+    padding: 15px !important;
   }
 }
 
@@ -357,6 +379,10 @@ svg {
   font-size: 0.9rem;
   color: #1e1e2e;
   margin-bottom: 10px;
+}
+
+.technologies * {
+  margin: 0 0 5px 0;
 }
 
 .project-item a {
