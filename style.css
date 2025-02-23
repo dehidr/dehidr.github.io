@@ -56,6 +56,13 @@
   }
 }
 
+.jetbrains-mono-<uniquifier > {
+  font-family: "JetBrains Mono", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
 body {
   font-family:
     "CaskaydiaCove Nerd Font", "Cascadia Code", "JetBrains Mono", monospace,
