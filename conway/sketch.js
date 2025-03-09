@@ -1,38 +1,5 @@
-// function setup() {
-//   let canvas = createCanvas(windowWidth, windowHeight);
-//   canvas.position(0, 0);
-//   canvas.style("z-index", "-1"); // Sends it to the background
-//   canvas.style("position", "fixed"); // Keeps it fixed even when scrolling
-// }
-//
-// function draw() {
-//   background(0); // Black background
-// }
-//
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-
-  // Calculate columns and rows
-  // columnCount = floor(width / cellSize);
-  // rowCount = floor(height / cellSize);
-
-  cellSizeRow = height / rowCount;
-  cellSizeCol = width / columnCount;
-}
-//
-// function draw() {
-//   //when mouse button is pressed, circles turn black
-//   if (mouseIsPressed === true) {
-//     fill(0);
-//   } else {
-//     fill(255);
-//   }
-//
-//   //white circles drawn at mouse position
-//   circle(mouseX, mouseY, 100);
-// }
-//
-let cellSize = 20;
+let q = await Q5.webgpu();
+let cellSize = 30;
 let cellSizeRow = cellSize;
 let cellSizeCol = cellSize;
 let columnCount;
@@ -40,15 +7,11 @@ let rowCount;
 let currentCells = [];
 let nextCells = [];
 
-function setup() {
-  // Set simulation framerate to 10 to avoid flickering
+q.setup = () => {
+  createCanvas();
   frameRate(12);
-  let canvas = createCanvas(windowWidth, windowHeight);
-  // let canvas = createCanvas(720, 400);
-  canvas.position(0, 0);
-  canvas.style("z-index", "-1"); // Sends it to the background
-  canvas.style("position", "fixed"); // Keeps it fixed even when scrolling
-
+  displayMode("maxed");
+  imageMode(CORNERS);
   // Calculate columns and rows
   columnCount = floor(width / cellSize);
   rowCount = floor(height / cellSize);
@@ -56,29 +19,26 @@ function setup() {
   cellSizeRow = height / rowCount;
   cellSizeCol = width / columnCount;
 
-  // Set each column in current cells to an empty array
-  // This allows cells to be added to this array
-  // The index of the cell will be its row number
   for (let column = 0; column < columnCount; column++) {
     currentCells[column] = [];
   }
 
-  // Repeat the same process for the next cells
   for (let column = 0; column < columnCount; column++) {
     nextCells[column] = [];
   }
 
+  noloop();
   randomizeBoard();
-  noLoop();
-  describe(
-    "Grid of squares that switch between white and black, demonstrating a simulation of John Conway's Game of Life. When clicked, the simulation resets.",
-  );
-}
+};
 
-function draw() {
-  background(200);
+q.draw = () => {
+  // clear();
   generate();
+  renderBoard();
+  cursor();
+};
 
+function renderBoard() {
   for (let column = 0; column < columnCount; column++) {
     for (let row = 0; row < rowCount; row++) {
       // Get cell value (0 or 1)
@@ -87,51 +47,58 @@ function draw() {
       // Convert cell value to get black (0) for alive or white (255 (white) for dead
       // fill((1 - cell / 8) * 255);
       if (cell === 0) {
-        fill("#fff");
+        fill("#ffffff");
       } else {
-        fill("#001");
+        fill("#000000");
       }
       stroke(0);
       // stroke("#1e1e2e");
-      rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
+      // rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
+      rect(
+        column * cellSizeCol - width / 2,
+        row * cellSizeRow - height / 2,
+        cellSizeCol,
+        cellSizeRow,
+      );
     }
   }
-  circles();
-  // cubes();
 }
 
-function circles() {
+function cursor() {
+  let fg = 0;
   //when mouse button is pressed, circles turn black
   if (mouseIsPressed === true) {
-    fill(0);
+    fg = 0;
   } else {
-    fill(255);
+    fg = 255;
   }
   //white circles drawn at mouse position
-  circle(mouseX, mouseY, cellSizeRow);
+  //
+  fill(fg);
+  circle(mouseX - width / 2, mouseY - height / 2, cellSizeRow * 5);
+
+  fill(255 - fg);
+  textAlign(CENTER, MIDDLE);
+  textSize(32);
+  text("CLICK", mouseX - width / 2, mouseY - height / 2, cellSizeRow * 3);
 }
 
-function cubes() {
-  // background(200);
+q.windowResized = () => {
+  resizeCanvas(windowWidth, windowHeight);
 
-  // Enable orbiting with the mouse.
-  orbitControl();
+  // Calculate columns and rows
+  // columnCount = floor(width / cellSize);
+  // rowCount = floor(height / cellSize);
 
-  // Rotate the coordinate system a little more each frame.
-  let angle = frameCount * 0.01;
-  let ca = cos(angle);
-  let sa = sin(angle);
-  applyMatrix(ca, 0, sa, 0, 0, 1, 0, 0, -sa, 0, ca, 0, 0, 0, 0, 1);
-
-  // Draw a box.
-  box();
-}
+  cellSizeRow = height / rowCount;
+  cellSizeCol = width / columnCount;
+};
 
 // Reset board when mouse is pressed
-function mousePressed() {
+q.mousePressed = () => {
   randomizeBoard();
   loop();
-}
+};
 
 // Fill board randomly
 function randomizeBoard() {
