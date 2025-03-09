@@ -1,4 +1,5 @@
 let q = await Q5.webgpu();
+
 let cellSize = 30;
 let cellSizeRow = cellSize;
 let cellSizeCol = cellSize;
@@ -56,13 +57,16 @@ q.setup = () => {
   for (let column = 0; column < columnCount; column++) {
     nextCells[column] = [];
   }
+
   randomColor();
+  background("#1e1e2e");
   noloop();
   randomizeBoard();
 };
 
 q.draw = () => {
-  // clear();
+  clear();
+  background(kitty);
   generate();
   renderBoard();
   cursor();
@@ -85,6 +89,7 @@ function renderBoard() {
       // stroke(0);
       stroke("#1e1e2e");
       // rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
+      //
       rect(
         column * cellSizeCol - width / 2,
         row * cellSizeRow - height / 2,
