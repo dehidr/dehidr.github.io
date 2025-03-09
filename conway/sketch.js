@@ -79,7 +79,7 @@ function cursor() {
 
   fill(255 - fg);
   textAlign(CENTER, MIDDLE);
-  textSize(32);
+  textSize(cellSizeRow);
   text("CLICK", mouseX - width / 2, mouseY - height / 2, cellSizeRow * 3);
 }
 
