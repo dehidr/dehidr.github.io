@@ -6,6 +6,36 @@ let columnCount;
 let rowCount;
 let currentCells = [];
 let nextCells = [];
+let kitty = "#f5e0dc";
+let catppuccin = [
+  "#f5e0dc",
+  "#f2cdcd",
+  "#f5c2e7",
+  "#cba6f7",
+  "#f38ba8",
+  "#eba0ac",
+  "#fab387",
+  "#f9e2af",
+  "#a6e3a1",
+  "#94e2d5",
+  "#89dceb",
+  "#74c7ec",
+  "#89b4fa",
+  "#b4befe",
+  "#89b4fa",
+  "#74c7ec",
+  "#89dceb",
+  "#94e2d5",
+  "#a6e3a1",
+  "#f9e2af",
+  "#fab387",
+  "#eba0ac",
+  "#f38ba8",
+  "#cba6f7",
+  "#f5c2e7",
+  "#f2cdcd",
+  "#f5e0dc",
+];
 
 q.setup = () => {
   createCanvas();
@@ -26,7 +56,7 @@ q.setup = () => {
   for (let column = 0; column < columnCount; column++) {
     nextCells[column] = [];
   }
-
+  randomColor();
   noloop();
   randomizeBoard();
 };
@@ -47,12 +77,13 @@ function renderBoard() {
       // Convert cell value to get black (0) for alive or white (255 (white) for dead
       // fill((1 - cell / 8) * 255);
       if (cell === 0) {
-        fill("#ffffff");
+        fill(kitty);
       } else {
-        fill("#000000");
+        fill("#1e1e2e");
+        // fill(catppuccin[(column + row) % 26]);
       }
-      stroke(0);
-      // stroke("#1e1e2e");
+      // stroke(0);
+      stroke("#1e1e2e");
       // rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
       rect(
         column * cellSizeCol - width / 2,
@@ -65,22 +96,29 @@ function renderBoard() {
 }
 
 function cursor() {
-  let fg = 0;
+  let bg = "#1e1e2e";
+  let fg = kitty;
   //when mouse button is pressed, circles turn black
   if (mouseIsPressed === true) {
-    fg = 0;
+    bg = "#1e1e2e";
+    fg = kitty;
   } else {
-    fg = 255;
+    fg = "#1e1e2e";
+    bg = kitty;
   }
   //white circles drawn at mouse position
   //
-  fill(fg);
+  fill(bg);
   circle(mouseX - width / 2, mouseY - height / 2, cellSizeRow * 5);
 
-  fill(255 - fg);
+  fill(fg);
   textAlign(CENTER, MIDDLE);
   textSize(cellSizeRow);
   text("CLICK", mouseX - width / 2, mouseY - height / 2, cellSizeRow * 3);
+}
+
+function randomColor() {
+  kitty = catppuccin[Math.floor(Math.random() * catppuccin.length)];
 }
 
 q.windowResized = () => {
