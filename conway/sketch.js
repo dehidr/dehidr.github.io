@@ -1,5 +1,6 @@
 let q = await Q5.webgpu();
 
+let maxCells = 36;
 let cellSize = 30;
 let cellSizeRow = cellSize;
 let cellSizeCol = cellSize;
@@ -44,11 +45,45 @@ q.setup = () => {
   displayMode("maxed");
   imageMode(CORNERS);
   // Calculate columns and rows
-  columnCount = floor(width / cellSize);
-  rowCount = floor(height / cellSize);
+  //
 
-  cellSizeRow = height / rowCount;
-  cellSizeCol = width / columnCount;
+  if (width > height) {
+    columnCount = floor(width / cellSize);
+    rowCount = floor(height / cellSize);
+
+    if (columnCount > maxCells) {
+      let ratio = columnCount / maxCells; // Changed maxCount to maxCells
+      columnCount = maxCells;
+      rowCount = rowCount * ratio;
+    }
+
+    if (rowCount > maxCells) {
+      let ratio = width / height; // Changed 'row' to 'rowCount' and 'maxCount' to 'maxCells'
+      rowCount = maxCells;
+      columnCount = floor(columnCount * ratio);
+    }
+
+    cellSizeRow = height / rowCount;
+    cellSizeCol = width / columnCount;
+  } else {
+    columnCount = floor(width / cellSize);
+    rowCount = floor(height / cellSize);
+
+    if (columnCount > maxCells) {
+      let ratio = width / height;
+      columnCount = maxCells;
+      rowCount = floor(rowCount * ratio);
+    }
+
+    if (rowCount > maxCells) {
+      let ratio = rowCount / maxCells; // Changed 'row' to 'rowCount' and 'maxCount' to 'maxCells'
+      rowCount = maxCells;
+      columnCount = columnCount * ratio;
+    }
+
+    cellSizeRow = height / rowCount;
+    cellSizeCol = width / columnCount;
+  }
 
   for (let column = 0; column < columnCount; column++) {
     currentCells[column] = [];
