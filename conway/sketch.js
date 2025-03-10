@@ -139,6 +139,7 @@ q.windowResized = () => {
 
 // Reset board when mouse is pressed
 q.mousePressed = () => {
+  randomColor();
   randomizeBoard();
   loop();
 };
