@@ -42,6 +42,9 @@ let catppuccin = [
 let worker;
 let computing;
 
+// ░█▀▀░█▀▀░▀█▀░█░█░█▀█
+// ░▀▀█░█▀▀░░█░░█░█░█▀▀
+// ░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░░
 q.setup = () => {
   worker = new Worker("worker.js");
   computing = false;
@@ -56,8 +59,95 @@ q.setup = () => {
   frameRate(12);
   displayMode("maxed");
   imageMode(CORNERS);
-  // Calculate columns and rows
 
+  calculateColumnsAndRows(); // Calculate columns and rows
+
+  randomColor();
+  background("#1e1e2e");
+  randomizeBoard();
+  renderBoard();
+  loop();
+};
+
+// ░█▀▄░█▀▄░█▀█░█░█
+// ░█░█░█▀▄░█▀█░█▄█
+// ░▀▀░░▀░▀░▀░▀░▀░▀
+q.draw = () => {
+  clear();
+  background(kitty);
+  generate();
+  renderBoard();
+  // cursor();
+};
+
+function renderBoard() {
+  noStroke();
+  beginShape();
+  for (let column = 0; column < columnCount; column++) {
+    for (let row = 0; row < rowCount; row++) {
+      let cell = currentCells[column][row];
+      fill(cell ? "#1e1e2e" : kitty);
+      stroke("#1e1e2e");
+      rect(
+        column * cellSizeCol - width / 2,
+        row * cellSizeRow - height / 2,
+        cellSizeCol,
+        cellSizeRow,
+      );
+    }
+  }
+  endShape();
+}
+
+function cursor() {
+  let bg = mouseIsPressed ? "#1e1e2e" : kitty;
+  let fg = mouseIsPressed ? kitty : "#1e1e2e";
+
+  fill(bg);
+  circle(mouseX - width / 2, mouseY - height / 2, cellSizeRow * 5);
+
+  fill(fg);
+  textAlign(CENTER, CENTER);
+  textSize(cellSizeRow);
+  text("CLICK", mouseX - width / 2, mouseY - height / 2, cellSizeRow * 3);
+}
+
+function randomColor() {
+  kitty = catppuccin[(Math.random() * catppuccin.length) | 0]; // Bitwise OR for faster rounding
+}
+
+// Reset board when mouse is pressed
+q.mousePressed = () => {
+  randomColor();
+  randomizeBoard();
+  if (!isLooping()) loop();
+};
+
+// Fill board randomly
+function randomizeBoard() {
+  currentCells = currentCells.map((row) =>
+    row.map(() => (Math.random() < 0.5 ? 1 : 0)),
+  );
+}
+
+async function generate() {
+  if (!computing) {
+    computing = true;
+    worker.postMessage({ currentCells, columnCount, rowCount });
+  }
+}
+
+// ░█░█░▀█▀░█▀█░█▀▄░█▀█░█░█
+// ░█▄█░░█░░█░█░█░█░█░█░█▄█
+// ░▀░▀░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀
+q.windowResized = () => {
+  resizeCanvas(windowWidth, windowHeight);
+
+  cellSizeRow = height / rowCount;
+  cellSizeCol = width / columnCount;
+};
+
+function calculateColumnsAndRows() {
   if (width > height) {
     columnCount = floor(width / cellSize);
     rowCount = floor(height / cellSize);
@@ -102,82 +192,5 @@ q.setup = () => {
 
   for (let column = 0; column < columnCount; column++) {
     nextCells[column] = [];
-  }
-
-  randomColor();
-  background("#1e1e2e");
-  noloop();
-  randomizeBoard();
-};
-
-q.draw = () => {
-  clear();
-  background(kitty);
-  generate();
-  renderBoard();
-  cursor();
-};
-
-function renderBoard() {
-  noStroke();
-  beginShape();
-  for (let column = 0; column < columnCount; column++) {
-    for (let row = 0; row < rowCount; row++) {
-      let cell = currentCells[column][row];
-      fill(cell ? "#1e1e2e" : kitty);
-      stroke("#1e1e2e");
-      rect(
-        column * cellSizeCol - width / 2,
-        row * cellSizeRow - height / 2,
-        cellSizeCol,
-        cellSizeRow,
-      );
-    }
-  }
-  endShape();
-}
-
-function cursor() {
-  let bg = mouseIsPressed ? "#1e1e2e" : kitty;
-  let fg = mouseIsPressed ? kitty : "#1e1e2e";
-
-  fill(bg);
-  circle(mouseX - width / 2, mouseY - height / 2, cellSizeRow * 5);
-
-  fill(fg);
-  textAlign(CENTER, CENTER);
-  textSize(cellSizeRow);
-  text("CLICK", mouseX - width / 2, mouseY - height / 2, cellSizeRow * 3);
-}
-
-function randomColor() {
-  kitty = catppuccin[(Math.random() * catppuccin.length) | 0]; // Bitwise OR for faster rounding
-}
-
-q.windowResized = () => {
-  resizeCanvas(windowWidth, windowHeight);
-
-  cellSizeRow = height / rowCount;
-  cellSizeCol = width / columnCount;
-};
-
-// Reset board when mouse is pressed
-q.mousePressed = () => {
-  randomColor();
-  randomizeBoard();
-  if (!isLooping()) loop();
-};
-
-// Fill board randomly
-function randomizeBoard() {
-  currentCells = currentCells.map((row) =>
-    row.map(() => (Math.random() < 0.5 ? 1 : 0)),
-  );
-}
-
-function generate() {
-  if (!computing) {
-    computing = true;
-    worker.postMessage({ currentCells, columnCount, rowCount });
   }
 }
