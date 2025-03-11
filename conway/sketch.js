@@ -39,7 +39,19 @@ let catppuccin = [
   "#f5e0dc",
 ];
 
+let worker;
+let computing;
+
 q.setup = () => {
+  worker = new Worker("worker.js");
+  computing = false;
+
+  worker.onmessage = function (e) {
+    nextCells = e.data;
+    currentCells = nextCells;
+    computing = false; // Allow next computation
+  };
+
   createCanvas();
   frameRate(12);
   displayMode("maxed");
@@ -163,38 +175,9 @@ function randomizeBoard() {
   );
 }
 
-// Create a new generation
-const neighborOffsets = [
-  [-1, -1],
-  [0, -1],
-  [1, -1],
-  [-1, 0],
-  [1, 0],
-  [-1, 1],
-  [0, 1],
-  [1, 1],
-];
-
 function generate() {
-  for (let column = 0; column < columnCount; column++) {
-    for (let row = 0; row < rowCount; row++) {
-      let neighbors = 0;
-
-      // Count living neighbors
-      for (let [dx, dy] of neighborOffsets) {
-        let x = (column + dx + columnCount) % columnCount;
-        let y = (row + dy + rowCount) % rowCount;
-        neighbors += currentCells[x][y];
-      }
-
-      // Apply Game of Life rules
-      nextCells[column][row] =
-        neighbors === 3 || (neighbors === 2 && currentCells[column][row] === 1)
-          ? 1
-          : 0;
-    }
+  if (!computing) {
+    computing = true;
+    worker.postMessage({ currentCells, columnCount, rowCount });
   }
-
-  // Swap buffers
-  [currentCells, nextCells] = [nextCells, currentCells];
 }
