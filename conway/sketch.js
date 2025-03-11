@@ -45,7 +45,6 @@ q.setup = () => {
   displayMode("maxed");
   imageMode(CORNERS);
   // Calculate columns and rows
-  //
 
   if (width > height) {
     columnCount = floor(width / cellSize);
@@ -58,7 +57,7 @@ q.setup = () => {
     }
 
     if (rowCount > maxCells) {
-      let ratio = width / height; // Changed 'row' to 'rowCount' and 'maxCount' to 'maxCells'
+      let ratio = width / height;
       rowCount = maxCells;
       columnCount = floor(columnCount * ratio);
     }
@@ -76,7 +75,7 @@ q.setup = () => {
     }
 
     if (rowCount > maxCells) {
-      let ratio = rowCount / maxCells; // Changed 'row' to 'rowCount' and 'maxCount' to 'maxCells'
+      let ratio = rowCount / maxCells;
       rowCount = maxCells;
       columnCount = columnCount * ratio;
     }
@@ -108,65 +107,37 @@ q.draw = () => {
 };
 
 function renderBoard() {
+  noStroke();
+  beginShape();
   for (let column = 0; column < columnCount; column++) {
     for (let row = 0; row < rowCount; row++) {
-      // Get cell value (0 or 1)
       let cell = currentCells[column][row];
-
-      // Convert cell value to get black (0) for alive or white (255 (white) for dead
-      // fill((1 - cell / 8) * 255);
-      if (cell === 0) {
-        fill(kitty);
-      } else {
-        fill("#1e1e2e");
-        // fill(catppuccin[(column + row) % 26]);
-      }
-      // stroke(0);
-      stroke("#1e1e2e");
-      // rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
-      //
-      rect(
-        column * cellSizeCol - width / 2,
-        row * cellSizeRow - height / 2,
-        cellSizeCol,
-        cellSizeRow,
-      );
+      fill(cell ? "#1e1e2e" : kitty);
+      rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
     }
   }
+  endShape();
 }
 
 function cursor() {
-  let bg = "#1e1e2e";
-  let fg = kitty;
-  //when mouse button is pressed, circles turn black
-  if (mouseIsPressed === true) {
-    bg = "#1e1e2e";
-    fg = kitty;
-  } else {
-    fg = "#1e1e2e";
-    bg = kitty;
-  }
-  //white circles drawn at mouse position
-  //
+  let bg = mouseIsPressed ? "#1e1e2e" : kitty;
+  let fg = mouseIsPressed ? kitty : "#1e1e2e";
+
   fill(bg);
   circle(mouseX - width / 2, mouseY - height / 2, cellSizeRow * 5);
 
   fill(fg);
-  textAlign(CENTER, MIDDLE);
+  textAlign(CENTER, CENTER);
   textSize(cellSizeRow);
   text("CLICK", mouseX - width / 2, mouseY - height / 2, cellSizeRow * 3);
 }
 
 function randomColor() {
-  kitty = catppuccin[Math.floor(Math.random() * catppuccin.length)];
+  kitty = catppuccin[(Math.random() * catppuccin.length) | 0]; // Bitwise OR for faster rounding
 }
 
 q.windowResized = () => {
   resizeCanvas(windowWidth, windowHeight);
-
-  // Calculate columns and rows
-  // columnCount = floor(width / cellSize);
-  // rowCount = floor(height / cellSize);
 
   cellSizeRow = height / rowCount;
   cellSizeCol = width / columnCount;
@@ -176,66 +147,48 @@ q.windowResized = () => {
 q.mousePressed = () => {
   randomColor();
   randomizeBoard();
-  loop();
+  if (!isLooping()) loop();
 };
 
 // Fill board randomly
 function randomizeBoard() {
-  for (let column = 0; column < columnCount; column++) {
-    for (let row = 0; row < rowCount; row++) {
-      // Randomly select value of either 0 (dead) or 1 (alive)
-      currentCells[column][row] = random([0, 1]);
-    }
-  }
+  currentCells = currentCells.map((row) =>
+    row.map(() => (Math.random() < 0.5 ? 1 : 0)),
+  );
 }
 
 // Create a new generation
+const neighborOffsets = [
+  [-1, -1],
+  [0, -1],
+  [1, -1],
+  [-1, 0],
+  [1, 0],
+  [-1, 1],
+  [0, 1],
+  [1, 1],
+];
+
 function generate() {
-  // Loop through every spot in our 2D array and count living neighbors
   for (let column = 0; column < columnCount; column++) {
     for (let row = 0; row < rowCount; row++) {
-      // Column left of current cell
-      // if column is at left edge, use modulus to wrap to right edge
-      let left = (column - 1 + columnCount) % columnCount;
+      let neighbors = 0;
 
-      // Column right of current cell
-      // if column is at right edge, use modulus to wrap to left edge
-      let right = (column + 1) % columnCount;
+      // Count living neighbors
+      for (let [dx, dy] of neighborOffsets) {
+        let x = (column + dx + columnCount) % columnCount;
+        let y = (row + dy + rowCount) % rowCount;
+        neighbors += currentCells[x][y];
+      }
 
-      // Row above current cell
-      // if row is at top edge, use modulus to wrap to bottom edge
-      let above = (row - 1 + rowCount) % rowCount;
-
-      // Row below current cell
-      // if row is at bottom edge, use modulus to wrap to top edge
-      let below = (row + 1) % rowCount;
-
-      // Count living neighbors surrounding current cell
-      let neighbours =
-        currentCells[left][above] +
-        currentCells[column][above] +
-        currentCells[right][above] +
-        currentCells[left][row] +
-        currentCells[right][row] +
-        currentCells[left][below] +
-        currentCells[column][below] +
-        currentCells[right][below];
-
-      // Rules of Life
-      // 1. Any live cell with fewer than two live neighbours dies
-      // 2. Any live cell with more than three live neighbours dies
-      if (neighbours < 2 || neighbours > 3) {
-        nextCells[column][row] = 0;
-        // 4. Any dead cell with exactly three live neighbours will come to life.
-      } else if (neighbours === 3) {
-        nextCells[column][row] = 1;
-        // 3. Any live cell with two or three live neighbours lives, unchanged, to the next generation.
-      } else nextCells[column][row] = currentCells[column][row];
+      // Apply Game of Life rules
+      nextCells[column][row] =
+        neighbors === 3 || (neighbors === 2 && currentCells[column][row] === 1)
+          ? 1
+          : 0;
     }
   }
 
-  // Swap the current and next arrays for next generation
-  let temp = currentCells;
-  currentCells = nextCells;
-  nextCells = temp;
+  // Swap buffers
+  [currentCells, nextCells] = [nextCells, currentCells];
 }
