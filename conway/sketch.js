@@ -113,7 +113,13 @@ function renderBoard() {
     for (let row = 0; row < rowCount; row++) {
       let cell = currentCells[column][row];
       fill(cell ? "#1e1e2e" : kitty);
-      rect(column * cellSizeCol, row * cellSizeRow, cellSizeCol, cellSizeRow);
+      stroke("#1e1e2e");
+      rect(
+        column * cellSizeCol - width / 2,
+        row * cellSizeRow - height / 2,
+        cellSizeCol,
+        cellSizeRow,
+      );
     }
   }
   endShape();
