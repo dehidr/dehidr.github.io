@@ -1,5 +1,41 @@
 let q = await Q5.webgpu();
 
+const workerCode = `
+self.onmessage = function (e) {
+    let { currentCells, columnCount, rowCount } = e.data;
+    let nextCells = [];
+
+    const neighborOffsets = [
+        [-1, -1], [0, -1], [1, -1],
+        [-1,  0],         [1,  0],
+        [-1,  1], [0,  1], [1,  1]
+    ];
+
+    for (let column = 0; column < columnCount; column++) {
+        nextCells[column] = [];
+        for (let row = 0; row < rowCount; row++) {
+            let neighbors = 0;
+
+            for (let [dx, dy] of neighborOffsets) {
+                let x = (column + dx + columnCount) % columnCount;
+                let y = (row + dy + rowCount) % rowCount;
+                neighbors += currentCells[x][y];
+            }
+
+            nextCells[column][row] =
+                neighbors === 3 || (neighbors === 2 && currentCells[column][row] === 1)
+                    ? 1
+                    : 0;
+        }
+    }
+    self.postMessage(nextCells);
+};
+`;
+
+const workerBlob = new Blob([workerCode], { type: "application/javascript" });
+const worker = new Worker(URL.createObjectURL(workerBlob));
+let computing;
+
 let maxCells = 36;
 let cellSize = 30;
 let cellSizeRow = cellSize;
@@ -39,14 +75,10 @@ let catppuccin = [
   "#f5e0dc",
 ];
 
-let worker;
-let computing;
-
 // ░█▀▀░█▀▀░▀█▀░█░█░█▀█
 // ░▀▀█░█▀▀░░█░░█░█░█▀▀
 // ░▀▀▀░▀▀▀░░▀░░▀▀▀░▀░░
 q.setup = () => {
-  worker = new Worker("worker.js");
   computing = false;
 
   worker.onmessage = function (e) {
