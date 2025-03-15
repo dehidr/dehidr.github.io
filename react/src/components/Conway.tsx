@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+// @ts-nocheck
+import { useEffect, useState } from "react";
 
 const maxCells = 36;
 const cellSize = 30;
@@ -7,8 +8,8 @@ let rowCount = maxCells;
 let cellSizeRow = window.innerWidth / columnCount;
 let cellSizeCol = window.innerHeight / rowCount;
 let randomGrid;
-let grid;
-let setGrid;
+let grid: (1 | 0)[][];
+let setGrid: (arg0: (1 | 0)[][]) => void;
 const generateRandomGrid = () =>
   Array.from({ length: rowCount }, () =>
     Array.from({ length: columnCount }, () => (Math.random() > 0.7 ? 1 : 0)),
@@ -17,22 +18,22 @@ function restartGrid() {
   // fg = randomColor();
   setGrid(generateRandomGrid());
 }
-const catppuccin = [
-  "#f5e0dc",
-  "#f2cdcd",
-  "#f5c2e7",
-  "#cba6f7",
-  "#f38ba8",
-  "#eba0ac",
-  "#fab387",
-  "#f9e2af",
-  "#a6e3a1",
-  "#94e2d5",
-  "#89dceb",
-  "#74c7ec",
-  "#89b4fa",
-  "#b4befe",
-];
+// const catppuccin = [
+//   "#f5e0dc",
+//   "#f2cdcd",
+//   "#f5c2e7",
+//   "#cba6f7",
+//   "#f38ba8",
+//   "#eba0ac",
+//   "#fab387",
+//   "#f9e2af",
+//   "#a6e3a1",
+//   "#94e2d5",
+//   "#89dceb",
+//   "#74c7ec",
+//   "#89b4fa",
+//   "#b4befe",
+// ];
 // let fg = randomColor();
 // let bg = "#cdd6f4";
 // let base = "#1e1e2e";
@@ -73,15 +74,18 @@ const GameOfLife = () => {
     setGrid(randomGrid);
 
     const interval = setInterval(() => {
-      setGrid((prevGrid) => {
-        return prevGrid.map((row, x) =>
-          row.map((cell, y) => {
+      setGrid((prevGrid: (0 | 1)[][]) => {
+        return prevGrid.map((row: (0 | 1)[], x: number) =>
+          row.map((cell: 0 | 1, y: number) => {
             const neighbors = [
               [-1, -1],
               [-1, 0],
               [-1, 1],
+
               [0, -1],
+              //[0,0]
               [0, 1],
+
               [1, -1],
               [1, 0],
               [1, 1],
@@ -163,37 +167,37 @@ const GameOfLife = () => {
   );
 };
 
-function randomColor() {
-  return catppuccin[(Math.random() * catppuccin.length) | 0]; // Bitwise OR for faster rounding
-}
-
-function getWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    // Handler to call on window size changes
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    // Add event listener for resize
-    window.addEventListener("resize", handleResize);
-
-    // Call handler immediately so state is up-to-date right away
-    handleResize();
-
-    // Remove the event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, [windowSize]); // Only run once
-
-  return windowSize;
-}
+// function randomColor() {
+//   return catppuccin[(Math.random() * catppuccin.length) | 0]; // Bitwise OR for faster rounding
+// }
+//
+// function getWindowSize() {
+//   const [windowSize, setWindowSize] = useState({
+//     width: window.innerWidth,
+//     height: window.innerHeight,
+//   });
+//
+//   useEffect(() => {
+//     // Handler to call on window size changes
+//     function handleResize() {
+//       setWindowSize({
+//         width: window.innerWidth,
+//         height: window.innerHeight,
+//       });
+//     }
+//
+//     // Add event listener for resize
+//     window.addEventListener("resize", handleResize);
+//
+//     // Call handler immediately so state is up-to-date right away
+//     handleResize();
+//
+//     // Remove the event listener on cleanup
+//     return () => window.removeEventListener("resize", handleResize);
+//   }, [windowSize]); // Only run once
+//
+//   return windowSize;
+// }
 
 function calculateGround() {
   // const { width, height } = getWindowSize();

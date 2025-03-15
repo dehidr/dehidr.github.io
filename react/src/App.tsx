@@ -1,11 +1,7 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import { Button } from "@/components/ui/button";
 import "./App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -18,14 +14,14 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About className="m-0 p-0" />} />
-          <Route path="/contact" element={<Contact className="m-0 p-0" />} />
-          <Route path="/conway" element={<Conway className="m-0 p-0" />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/conway" element={<Conway />} />
           <Route
             path="/cv"
             element={
               <div>
-                <Conway className="m-0 p-0" />
+                <Conway />
                 <div className=" ">
                   {/* border-b-4 border-black pb-2  */}
                   <h2
@@ -35,7 +31,7 @@ function App() {
                     Emre Kerman
                   </h2>
                 </div>
-                <CV className="m-0 p-0" />
+                <CV />
               </div>
             }
           />
