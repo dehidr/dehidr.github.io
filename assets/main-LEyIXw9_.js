@@ -1,1 +1,0 @@
-import{j as t,P as r,c as e,r as o}from"./Conway-CuUPeV_8.js";function s(){return t.jsx("div",{className:"m-0 p-0",children:t.jsx(r,{})})}e.createRoot(document.getElementById("root")).render(t.jsx(o.StrictMode,{children:t.jsx(s,{})}));

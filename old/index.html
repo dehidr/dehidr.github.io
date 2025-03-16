@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>[home] dehidr</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        font-family: Inter, sans-serif;
+        font-feature-settings:
+          "liga" 1,
+          "calt" 1; /* fix for Chrome */
+      }
+      @supports (font-variation-settings: normal) {
+        :root {
+          font-family: InterVariable, sans-serif;
+        }
+      }
+    </style>
+
+    <!-- For stability in production, it's recommended that you hardcode the latest version in the CDN link. -->
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/franken-ui@internal/dist/css/core.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/franken-ui@internal/dist/css/utilities.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+
+    <script>
+      const htmlElement = document.documentElement;
+      const mocha = {
+        ".uk-theme-mocha": {
+          "--foreground": "240 21% 15%",
+          "--background": "226 64% 88%",
+          "--muted-foreground": "240 12% 19%",
+          "--muted": "240 12% 69%",
+          "--popover-foreground": "240 21% 12%",
+          "--popover": "226 64% 98%",
+          "--card-foreground": "240 21% 13%",
+          "--card": "226 64% 93%",
+          "--border": "240 11% 20%",
+          "--input": "240 11% 23%",
+          "--primary-foreground": "267 84% 81%",
+          "--primary": "267 84% 21%",
+          "--secondary-foreground": "267 30% 25%",
+          "--secondary": "267 30% 85%",
+          "--accent-foreground": "240 21% 30%",
+          "--accent": "240 21% 90%",
+          "--destructive-foreground": "8 96% 56%",
+          "--destructive": "0 0% 100%",
+          "--ring": "267 84% 81%",
+          "--chart-1": "267 84% 81%",
+          "--chart-2": "267 30% 25%",
+          "--chart-3": "240 21% 30%",
+          "--chart-4": "267 30% 28%",
+          "--chart-5": "267 87% 81%",
+          "--radius": "0.5rem",
+        },
+        ".dark.uk-theme-mocha": {
+          "--background": "240 21% 15%",
+          "--foreground": "226 64% 88%",
+          "--muted": "240 12% 19%",
+          "--muted-foreground": "240 12% 69%",
+          "--popover": "240 21% 12%",
+          "--popover-foreground": "226 64% 98%",
+          "--card": "240 21% 13%",
+          "--card-foreground": "226 64% 93%",
+          "--border": "240 11% 20%",
+          "--input": "240 11% 23%",
+          "--primary": "267 84% 81%",
+          "--primary-foreground": "267 84% 21%",
+          "--secondary": "267 30% 25%",
+          "--secondary-foreground": "267 30% 85%",
+          "--accent": "240 21% 30%",
+          "--accent-foreground": "240 21% 90%",
+          "--destructive": "8 96% 56%",
+          "--destructive-foreground": "0 0% 100%",
+          "--ring": "267 84% 81%",
+          "--chart-1": "267 84% 81%",
+          "--chart-2": "267 30% 25%",
+          "--chart-3": "240 21% 30%",
+          "--chart-4": "267 30% 28%",
+          "--chart-5": "267 87% 81%",
+        },
+      };
+      const __FRANKEN__ = JSON.parse(
+        localStorage.getItem("__FRANKEN__") || "{}",
+      );
+
+      if (
+        __FRANKEN__.mode === "dark" ||
+        (!__FRANKEN__.mode &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        htmlElement.classList.add("dark");
+      } else {
+        htmlElement.classList.remove("dark");
+      }
+
+      htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-mocha");
+      htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
+      htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
+      htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
+      htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+    </script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/franken-ui@internal/dist/js/core.iife.js"
+    ></script>
+    <script
+      type="module"
+      src="https://unpkg.com/franken-ui@internal/dist/js/icon.iife.js"
+    ></script>
+
+    <script>
+      function setRandomGifBackground(jsonUrl) {
+        fetch(jsonUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            if (!Array.isArray(data) || data.length === 0) {
+              console.error("Invalid or empty GIF list");
+              return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const randomGifUrl = data[randomIndex].url;
+
+            document.body.style.backgroundImage = `url('${randomGifUrl}'), linear-gradient(
+    #89b4fa,
+    #89dceb,
+    #94e2d5,
+    #a6e3a1,
+    #74c7ec,
+    #f5c2e7,
+    #f38ba8,
+    #b4befe,
+    #cba6f7,
+    #eba0ac,
+    #f2cdcd,
+    #f5e0dc,
+    #f9e2af,
+    #fab387,
+    #74c7ec,
+    #89b4fa)`;
+            document.body.style.backgroundSize = "contain";
+            document.body.style.backgroundPosition = "center";
+          })
+          .catch((error) => console.error("Error fetching GIFs:", error));
+      }
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        setRandomGifBackground("https://dehidr.github.io/gifs.json");
+      });
+    </script>
+    <!-- <script
+      type="module"
+      src="https://unpkg.com/franken-ui@internal/dist/js/chart.iife.js"
+    ></script> -->
+  </head>
+  <!-- <body class="bg-background text-foreground"> -->
+  <body>
+    <!-- START CODING HERE -->
+    <div class="navbar uk-card uk-card-body gap-x-2 flex" style="z-index: 200">
+      <div style="display: inline-block" style="flex-grow: 2">
+        <b><a href="./index.html">[HOME]</a></b>
+        <!-- <a href="./cv/index.html">[CV]</a> -->
+
+        <a href="https://www.github.com/dehidr">[GITHUB]</a>
+      </div>
+      <div class="uk-inline">
+        <!-- <button class="uk-btn uk-btn-default"> -->
+
+        <div class="size-4" style="display: inline-block">
+          <uk-icon icon="palette" style="display: inline-block"></uk-icon>
+        </div>
+        <!-- </button> -->
+        <div
+          class="uk-card uk-card-body uk-drop w-96"
+          data-uk-drop="mode: click; offset: 8"
+        >
+          <div class="uk-h3">Customize</div>
+          <p class="mb-4 mt-1 text-sm text-muted-foreground"></p>
+          <uk-theme-switcher id="theme-switcher">
+            <select hidden>
+              <optgroup data-key="theme" label="Theme">
+                <option data-hex="#52525b" value="uk-theme-zinc">Zinc</option>
+                <option data-hex="#64748b" value="uk-theme-slate">Slate</option>
+                <option data-hex="#78716c" value="uk-theme-stone">Stone</option>
+                <option data-hex="#6b7280" value="uk-theme-gray">Gray</option>
+                <option data-hex="#1e1e2e" value="uk-theme-mocha" selected>
+                  Mocha
+                </option>
+                <option data-hex="#737373" value="uk-theme-neutral">
+                  Neutral
+                </option>
+                <option data-hex="#dc2626" value="uk-theme-red">Red</option>
+                <option data-hex="#e11d48" value="uk-theme-rose">Rose</option>
+                <option data-hex="#f97316" value="uk-theme-orange">
+                  Orange
+                </option>
+                <option data-hex="#16a34a" value="uk-theme-green">Green</option>
+                <option data-hex="#2563eb" value="uk-theme-blue">Blue</option>
+                <option data-hex="#facc15" value="uk-theme-yellow">
+                  Yellow
+                </option>
+                <option data-hex="#7c3aed" value="uk-theme-violet">
+                  Violet
+                </option>
+              </optgroup>
+              <optgroup data-key="radii" label="Radii">
+                <option value="uk-radii-none">None</option>
+                <option value="uk-radii-sm">Small</option>
+                <option value="uk-radii-md" selected>Medium</option>
+                <option value="uk-radii-lg">Large</option>
+              </optgroup>
+              <optgroup data-key="shadows" label="Shadows">
+                <option value="uk-shadows-none">None</option>
+                <option value="uk-shadows-sm" selected>Small</option>
+                <option value="uk-shadows-md">Medium</option>
+                <option value="uk-shadows-lg">Large</option>
+              </optgroup>
+              <optgroup data-key="font" label="Font">
+                <option value="uk-font-sm" selected>Small</option>
+                <option value="uk-font-base">Default</option>
+              </optgroup>
+              <optgroup data-key="mode" label="Mode">
+                <option data-icon="sun" value="light">Light</option>
+                <option data-icon="moon" value="dark">Dark</option>
+              </optgroup>
+            </select>
+          </uk-theme-switcher>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div
+        class="masonry uk-card uk-card-body"
+        style="margin: 0 0 20px; overflow: hidden; width: 100%"
+      >
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="uk-card uk-card-body masonry"
+        style="grid-template-columns: repeat(auto-fit, minmax(240px, 100fr))"
+      >
+        <a
+          class="uk-btn uk-btn-default"
+          href="https://open.spotify.com/user/11144260547"
+          >spotify</a
+        >
+        <a class="uk-btn uk-btn-default" href="https://letterboxd.com/dehidr/"
+          >letterboxd</a
+        >
+        <a
+          class="uk-btn uk-btn-default"
+          href="https://www.last.fm/user/emrekerman"
+          >last.fm</a
+        >
+        <a class="uk-btn uk-btn-default" href="https://www.github.com/dehidr"
+          >github</a
+        >
+      </div>
+
+      <div
+        class="masonry uk-card uk-card-body"
+        style="margin: 20px 0 20px; overflow: hidden; width: 100%"
+      >
+        <div class="marquee-container">
+          <div class="marquee-content">
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+            <span>THE WORLD IS YOURS!</span>
+            <span>I AM THE MILKMAN! MY MILK IS DELICIOUS!</span>
+            <span>HI THERE, WOULD YOU LIKE TO SIGN MY PETITION?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END -->
+  </body>
+</html>
